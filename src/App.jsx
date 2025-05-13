@@ -7,6 +7,7 @@ import { GameOver } from "./components/GameOver";
 
 import { deriveActivePlayer, deriveGameBoard, deriveWinner } from "./utils";
 import { PLAYERS } from "./constants";
+import { Header } from "./components/Header";
 
 function App() {
   const [players, setPlayers] = useState(PLAYERS);
@@ -45,29 +46,32 @@ function App() {
   };
 
   return (
-    <main>
-      <div id="game-container">
-        <ol id="players" className="highlight-player">
-          <Player
-            initialName={PLAYERS.X}
-            symbol="X"
-            isActive={activePlayer === "X"}
-            onPlayerNameChange={handlePlayerNameChange}
-          />
-          <Player
-            initialName={PLAYERS.O}
-            symbol="O"
-            isActive={activePlayer === "O"}
-            onPlayerNameChange={handlePlayerNameChange}
-          />
-        </ol>
-        {(winner || hasDraw) && (
-          <GameOver winner={winner} onRestart={handleRestart} />
-        )}
-        <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
-      </div>
-      <Log turns={gameTurns} />
-    </main>
+    <>
+      <Header />
+      <main>
+        <div id="game-container">
+          <ol id="players" className="highlight-player">
+            <Player
+              initialName={PLAYERS.X}
+              symbol="X"
+              isActive={activePlayer === "X"}
+              onPlayerNameChange={handlePlayerNameChange}
+            />
+            <Player
+              initialName={PLAYERS.O}
+              symbol="O"
+              isActive={activePlayer === "O"}
+              onPlayerNameChange={handlePlayerNameChange}
+            />
+          </ol>
+          {(winner || hasDraw) && (
+            <GameOver winner={winner} onRestart={handleRestart} />
+          )}
+          <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
+        </div>
+        <Log turns={gameTurns} />
+      </main>
+    </>
   );
 }
 
